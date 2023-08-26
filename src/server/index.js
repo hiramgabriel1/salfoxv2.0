@@ -3,18 +3,27 @@ import dotenv from "dotenv"
 import morgan from "morgan"
 import colors from "colors"
 import cors from "cors"
-import registerRoute from "../routes/register.js"
+import userRoute from "../routes/user.js"
+import connectionDB from "../config/connectionDB.js"
+import postsRoute from "../routes/posts/posts.js"
+
+// initialization to DB
+connectionDB()
 
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// connect to PORT
 dotenv.config()
 
+// middlewares
 app.use(express.json())
 app.use(morgan("dev"))
 app.use(cors())
 
+
 // TODO: routes
-app.use("/auth", registerRoute)
+app.use("/auth", userRoute)
+app.use("/submit", postsRoute)
 
 app.listen(PORT)
