@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-userSchema.index({ username: "text" })
+userSchema.index({ carrera: "text" })
 const User = new mongoose.model("User", userSchema)
 
 export default User

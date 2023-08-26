@@ -7,23 +7,23 @@ import userRoute from "../routes/user.js"
 import connectionDB from "../config/connectionDB.js"
 import postsRoute from "../routes/posts/posts.js"
 
-// initialization to DB
+// TODO: initialization to DB
 connectionDB()
 
 const app = express()
 const PORT = process.env.PORT || 3000
 
-// connect to PORT
+// TODO: connect to PORT
 dotenv.config()
 
-// middlewares
+// TODO: middlewares
 app.use(express.json())
 app.use(morgan("dev"))
 app.use(cors())
 
-
 // TODO: routes
 app.use("/auth", userRoute)
-app.use("/submit", postsRoute)
+app.use("/post", postsRoute)
 
+// TODO: PORT listening 
 app.listen(PORT)
