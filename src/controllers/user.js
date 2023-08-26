@@ -1,20 +1,23 @@
 import User from "../models/User.js";
-import { encryptPassword } from "../middlewares/bcrypt.config.js";
+import { encryptPassword } from "../middlewares/hash.js";
 
+// TODO: create user
 export const createUser = async (req, res) => {
-  try {
-    const {
-      username,
-      lastName,
-      interest,
-      carrera,
-      sexo,
-      socialNetworks,
-      email,
-      password,
-    } = req.body;
+  const {
+    username,
+    lastName,
+    interest,
+    carrera,
+    sexo,
+    socialNetworks,
+    email,
+    password,
+  } = req.body;
 
-    const encryptedPassword = await encryptPassword(password);
+  try {
+
+    // encrypt password
+    const hashedPassword = await encryptPassword(password);
 
     const data = {
       username,
@@ -24,7 +27,7 @@ export const createUser = async (req, res) => {
       sexo,
       socialNetworks,
       email,
-      encryptedPassword,
+      password,
     };
 
     // guardamos
@@ -32,7 +35,8 @@ export const createUser = async (req, res) => {
 
     // validamos si se ha guardado o no en la db y porque
     if (!userCreated) {
-      res.json({ error: "no se ha creado el usuario" });
+      res.json({ error: "no se ha creado el usuario", data: data });
+
       return;
     }
     res.json({ message: "usuario creado con éxito", data: userCreated }); // Cambiado userData a userCreated
@@ -42,6 +46,7 @@ export const createUser = async (req, res) => {
   }
 };
 
+// TODO: filter carreras
 export const filterUsersCategories = async (req, res) => {
   try {
     const { carrera } = req.params;
@@ -53,3 +58,17 @@ export const filterUsersCategories = async (req, res) => {
     throw new Error(error);
   }
 };
+
+// TODO: get all users
+export const getUsers = async (req, res) => {
+  try {
+    // get data from database
+    const users = await User.find()
+    if(users){
+      res.status(200).json({ message: users })
+    }
+    
+  } catch (error) {
+    throw new Error(error);
+  }
+}
