@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        imageUrlProfile: {
+            secure_url: String,
+            public_id: String
+        },
         interest: {
             type: String,
             required: true,
