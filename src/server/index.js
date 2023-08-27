@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import colors from "colors";
 import cors from "cors";
-import fileUpload from "express-fileupload";
 import { PORT } from "../config/keys.js";
 import userRoute from "../routes/user.js";
 import connectionDB from "../config/mongoose.config.js";
@@ -21,12 +20,11 @@ dotenv.config();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/uploads/",
-  })
-);
+
+// ! error handling
+// app.use((req, res) => {
+//   res.status(404).send("Recurso no encontrado");
+// });
 
 // TODO: routes
 app.use("/auth", userRoute);
