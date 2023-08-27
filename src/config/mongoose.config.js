@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import { MONGO_URI } from "./keys.js";
 
 const connectionDB = async () => {
-    const URI = "mongodb+srv://itsrusty:JavaScript2003@salfox.dahian3.mongodb.net/"
+    
   try {
-    await mongoose.connect(URI, {
+    await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
