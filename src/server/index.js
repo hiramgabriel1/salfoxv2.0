@@ -7,6 +7,7 @@ import { PORT } from "../config/keys.js";
 import userRoute from "../routes/user.js";
 import connectionDB from "../config/mongoose.config.js";
 import postsRoute from "../routes/posts/posts.js";
+import router from "../routes/indexRoute.js";
 
 // TODO: initialization to DB
 connectionDB();
@@ -29,6 +30,7 @@ app.use(cors());
 // TODO: routes
 app.use("/auth", userRoute);
 app.use("/post", postsRoute);
+app.use("/", router)
 
 // TODO: PORT listening
 app.listen(PORT);
