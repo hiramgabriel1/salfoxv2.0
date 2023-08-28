@@ -31,7 +31,6 @@ export const filterPosts = async (req, res) => {
       $text: { $search: titlePost },
     });
 
-    // validate
     if (filterPostByTitle) {
       res.status(200).json({ message: filterPostByTitle });
     } else if (!filterPostByTitle || filterPostByTitle.length === 0) {

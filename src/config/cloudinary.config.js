@@ -1,22 +1,33 @@
 import { v2 as cloudinary } from "cloudinary";
 import { CLOUDINARY_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET } from "./keys.js";
 
-// & config object
-
+// Configurar cloudinary
 cloudinary.config({
   cloud_name: CLOUDINARY_NAME,
   api_key: CLOUDINARY_KEY,
   api_secret: CLOUDINARY_SECRET,
 });
 
-// & upload image METHOD
+// Método para cargar una imagen
 export const uploadImage = async (filePath) => {
-  return await cloudinary.uploader.upload(filePath, {
-    folder: "image",
-  });
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: "image", // Cambiado a "image" para la carpeta
+    });
+    return result;
+  } catch (error) {
+    console.error("Error al cargar la imagen:", error);
+    throw error; // Relanzar el error para manejarlo en el llamador
+  }
 };
 
-// & delete image METHOD
-export const deleteImages = async (filePath) => {
-  return await cloudinary.uploader.destroy(publicId);
+// Método para eliminar una imagen
+export const deleteImage = async (publicId) => {
+  try {
+    const result = await cloudinary.uploader.destroy(publicId);
+    return result;
+  } catch (error) {
+    console.error("Error al eliminar la imagen:", error);
+    throw error; // Relanzar el error para manejarlo en el llamador
+  }
 };
