@@ -10,10 +10,11 @@ const userSchema = new mongoose.Schema(
         lastName: {
             type: String,
             required: true,
+
         },
-        imageUrlProfile: {
-            secure_url: String,
-            public_id: String
+        image: {
+           secure_url: String,
+           public_id: String
         },
         interest: {
             type: String,

@@ -14,8 +14,10 @@ export const createUser = async (req, res) => {
     email,
     password,
   } = req.body;
+  // const files = req.files;
 
   try {
+
     // Encriptar contraseña
     const hashedPassword = await encryptPassword(password);
 
@@ -49,9 +51,9 @@ export const createUser = async (req, res) => {
       res.json({ message: "Usuario creado con éxito", data: userCreated });
     }
   } catch (error) {
-    if (req.files?.image) {
-      await fs.unlink(req.files.image.tempFilePath);
-    }
+    // if (req.files?.image) {
+    //   await fs.unlink(req.files.image.tempFilePath);
+    // }
     console.error(error); // Imprimir el error en la consola para depuración
     res.status(500).json({ error: error.message }); // Devolver el mensaje de error específico
   }

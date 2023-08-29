@@ -21,11 +21,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-// ! error handling
-// app.use((req, res) => {
-//   res.status(404).send("Recurso no encontrado");
-// });
-
 // TODO: routes
 app.use("/auth", userRoute);
 app.use("/post", postsRoute);
